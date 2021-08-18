@@ -18,19 +18,21 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/user',function(Request $request){
-    $user = new App\Models\User();
-    $user->name = $request->name;
-    $user->email = "patricio2@patricio.com";
-    $user->password = Hash::make(123456);
-    $user->save();
-    return response()->json(["msj"=>"se guardo"],200);
-});
-
-Route::middleware('auth:api')->get('/users',function(Request $request){
-    return response()->json(["msj"=>App\Models\User::all()]);
-});
-
-Route::get('/login',function(){
-    return response()->json(["mens"=>"no podes"],401);
+Route::get('/',function(){
+    //cuando Passport no reconoce el token redirecciona a una ruta de nombre "login"
+    return response()->json(["msg"=>"Necesita estar logueado"],401);
 })->name('login');
+
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', 'App\Http\Controllers\AuthController@login');
+    Route::post('signup', 'App\Http\Controllers\AuthController@signUp');
+
+    Route::group([
+      'middleware' => 'auth:api'
+    ], function() {
+        Route::get('logout', 'App\Http\Controllers\AuthController@logout');
+        Route::get('user', 'App\Http\Controllers\AuthController@user');
+    });
+});
