@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEscuelassTable extends Migration
+class CreateSeccionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateEscuelassTable extends Migration
      */
     public function up()
     {
-        Schema::create('escuelass', function (Blueprint $table) {
+        Schema::create('seccions', function (Blueprint $table) {
             $table->id();
+            $table->strin('nombre');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateEscuelassTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('escuelass');
+        Schema::dropIfExists('seccions');
     }
 }

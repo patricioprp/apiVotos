@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeccionesTable extends Migration
+class CreateDepartamentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateSeccionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('secciones', function (Blueprint $table) {
+        Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->timestamps();
+
+            $table->integer('seccion_id')->unsigned()->index()->nullable();
+            $table->foreign('seccion_id')->references('id')->on('seccions');
         });
     }
 
@@ -26,6 +30,6 @@ class CreateSeccionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('secciones');
+        Schema::dropIfExists('departamentos');
     }
 }
