@@ -23,6 +23,10 @@ Route::get('/',function(){
     return response()->json(["msg"=>"Necesita estar logueado"],401);
 })->name('login');
 
+Route::get('/seccion-departamento','App\Http\Controllers\DepartamentoController@all');
+Route::get('/ciudad-comuna','App\Http\Controllers\ComunaController@all');
+Route::get('/escuela','App\Http\Controllers\EscuelaController@all');
+
 Route::group([
     'prefix' => 'auth'
 ], function () {

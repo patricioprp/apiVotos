@@ -19,7 +19,7 @@ class CreateEscuelasTable extends Migration
             $table->string('domicilio');
             $table->timestamps();
 
-            $table->integer('comuna_id')->unsigned()->index()->nullable();
+            $table->unsignedBigInteger('comuna_id');
             $table->foreign('comuna_id')->references('id')->on('comunas');
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepartamentosTable extends Migration
+class CreateSubPartidosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateDepartamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('departamentos', function (Blueprint $table) {
+        Schema::create('sub_partidos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->timestamps();
 
-            $table->unsignedBigInteger('seccion_id');
-            $table->foreign('seccion_id')->references('id')->on('seccions');
+            $table->unsignedBigInteger('partido_id');
+            $table->foreign('partido_id')->references('id')->on('partidos');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateDepartamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departamentos');
+        Schema::dropIfExists('sub_partidos');
     }
 }

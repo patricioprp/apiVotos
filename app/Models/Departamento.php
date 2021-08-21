@@ -13,4 +13,9 @@ class Departamento extends Model
     {
         return $this->belongsTo(Seccion::class);
     }
+
+    public function comunas()
+    {
+       return $this->hasMany(Comuna::class);
+    }
 }

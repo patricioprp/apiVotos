@@ -21,11 +21,11 @@ class CreateUsersTable extends Migration
             $table->bigInteger('dni')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            // $table->integer('id_depto');
-            // $table->integer('id_escuela');
-            $table->integer('id_mesa');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->unsignedBigInteger('mesa_id');
+            $table->foreign('mesa_id')->references('id')->on('mesas');
         });
     }
 

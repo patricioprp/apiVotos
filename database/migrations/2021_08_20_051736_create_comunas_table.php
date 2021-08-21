@@ -18,7 +18,7 @@ class CreateComunasTable extends Migration
             $table->string('nombre');
             $table->timestamps();
 
-            $table->integer('departamento_id')->unsigned()->index()->nullable();
+            $table->unsignedBigInteger('departamento_id');
             $table->foreign('departamento_id')->references('id')->on('departamentos');
         });
     }
