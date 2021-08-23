@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMesaPartidoTable extends Migration
+class CreateMesaSubPartido extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateMesaPartidoTable extends Migration
      */
     public function up()
     {
-        Schema::create('mesa_partido', function (Blueprint $table) {
+        Schema::create('mesa_sub_partido', function (Blueprint $table) {
             $table->id();
             $table->integer('voto_partido');
             $table->timestamps();
 
             $table->unsignedBigInteger('mesa_id');
-            $table->unsignedBigInteger('partido_id');
+            $table->unsignedBigInteger('sub_partido_id');
             $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('cascade');
-            $table->foreign('partido_id')->references('id')->on('partidos')->onDelete('cascade');
+            $table->foreign('sub_partido_id')->references('id')->on('sub_partidos')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateMesaPartidoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mesa_partido');
+        Schema::dropIfExists('mesa_sub_partido');
     }
 }

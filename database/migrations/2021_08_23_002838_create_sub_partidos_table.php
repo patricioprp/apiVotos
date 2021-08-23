@@ -17,8 +17,6 @@ class CreateSubPartidosTable extends Migration
             $table->id();
             $table->string('nombre');
 
-            $table->unsignedBigInteger('partido_id');
-            $table->foreign('partido_id')->references('id')->on('partidos');
             $table->timestamps();
         });
     }

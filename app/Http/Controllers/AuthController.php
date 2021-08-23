@@ -63,7 +63,7 @@ class AuthController extends Controller
 
         // Creamos las reglas de validación
         $rules = [
-            'email'     => 'required|string|email|unique:users',
+            'email'     => 'required|string|email',
             'password'  => 'required|string'
             ];
         // Ejecutamos el validador, en caso de que falle devolvemos la respuesta
