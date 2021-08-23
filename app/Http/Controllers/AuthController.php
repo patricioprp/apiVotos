@@ -64,7 +64,7 @@ class AuthController extends Controller
         // Creamos las reglas de validación
         $rules = [
             'email'     => 'required|string|email',
-            'password'  => 'required|string'
+            'password'  => 'required'
             ];
         // Ejecutamos el validador, en caso de que falle devolvemos la respuesta
         $validator = \Validator::make($request->all(), $rules);
