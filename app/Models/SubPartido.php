@@ -9,6 +9,11 @@ class SubPartido extends Model
 {
     use HasFactory;
 
+    public function mesas()
+    {
+       return $this->belongsToMany(Mesa::class);
+    }
+
     public function partido()
     {
         return $this->belongsTo(Partido::class);

@@ -16,7 +16,8 @@ class CreateSubPartidosTable extends Migration
         Schema::create('sub_partidos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-
+            $table->unsignedBigInteger('partido_id');
+            $table->foreign('partido_id')->references('id')->on('partidos');
             $table->timestamps();
         });
     }

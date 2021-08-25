@@ -19,8 +19,8 @@ class Mesa extends Model
        return $this->hasOne(User::class);
     }
 
-    public function partidos()
+    public function subPartidos()
     {
-       return $this->belongsToMany(Partido::class);
+       return $this->belongsToMany(SubPartido::class);
     }
 }

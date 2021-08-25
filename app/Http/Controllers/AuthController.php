@@ -23,6 +23,8 @@ class AuthController extends Controller
         $rules = [
             'name'      => 'required|string',
             'email'     => 'required|string|email|unique:users',
+            'dni'       => 'required|Integer|unique:users',
+            'mesa_id'   => 'required|Integer|Min:1|Max:4|unique:users',
             'password'  => 'required|string'
             ];
         // Ejecutamos el validador, en caso de que falle devolvemos la respuesta
@@ -39,6 +41,8 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'dni' => $request->dni,
+            'mesa_id' => $request->mesa_id,
             'password' => bcrypt($request->password)
         ]);
         DB::commit();

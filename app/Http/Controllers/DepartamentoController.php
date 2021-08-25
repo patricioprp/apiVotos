@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class DepartamentoController extends Controller
 {
     public function all(){
-        return response()->json(['Msg' => Departamento::with('comunas.escuelas','seccion')->get()],200);
+        return response()->json(['Msg' => Departamento::with('seccion','comunas.escuelas')->get()],200);
     }
 }

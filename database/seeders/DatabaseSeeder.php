@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             DepartamentoSeeder::class,
             ComunaSeeder::class,
             EscuelaSeeder::class,
-            MesaSeeder::class,
             SubPartidoSeeder::class,
+            MesaSeeder::class,
             UserSeeder::class,
         ]);
     }

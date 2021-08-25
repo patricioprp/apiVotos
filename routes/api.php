@@ -25,7 +25,7 @@ Route::get('/',function(){
 
 Route::get('/seccion-departamento','App\Http\Controllers\DepartamentoController@all');
 Route::get('/ciudad-comuna','App\Http\Controllers\ComunaController@all');
-Route::get('/escuela','App\Http\Controllers\EscuelaController@all');
+Route::get('/escuelas','App\Http\Controllers\EscuelaController@all');
 
 Route::group([
     'prefix' => 'auth'
@@ -38,5 +38,6 @@ Route::group([
     ], function() {
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
         Route::get('user', 'App\Http\Controllers\AuthController@user');
+        Route::get('users','App\Http\Controllers\UserController@all');
     });
 });
