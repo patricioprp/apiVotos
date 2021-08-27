@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function all(){
 
-     return response()->json(User::all());
+     return response()->json(['usuarios'=>User::all()],200);
         
     }
 }
