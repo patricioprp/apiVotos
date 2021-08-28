@@ -116,6 +116,10 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json([
+            'success' => true,
+            'message' => "usuario obtenido correctamente",
+            'data' => $request->user(),
+        ]);
     }
 }
