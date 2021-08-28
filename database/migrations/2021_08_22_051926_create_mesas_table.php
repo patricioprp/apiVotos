@@ -15,6 +15,7 @@ class CreateMesasTable extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
+            $table->integer('nro_mesa');
             $table->integer('desde');
             $table->integer('hasta');
             $table->timestamps();

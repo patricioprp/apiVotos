@@ -48,7 +48,9 @@ class AuthController extends Controller
         DB::commit();
         Log::info('Se guardo el usuario ' . $request->apellido);
         return response()->json([
-            'message' => 'Successfully created user!'
+            'message' => 'Successfully created user!',
+            'success' => true,
+            'message' => "usuario registrado correctamente",
         ], 201);
     } catch (\PDOException $e) {
         DB::rollBack();
@@ -92,6 +94,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
+            "success"=> true,
+            "messagge"=> "Usuario logueado correctamente",
         ]);
     }
 
