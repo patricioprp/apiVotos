@@ -23,7 +23,7 @@ Route::get('/',function(){
     return response()->json(["msg"=>"Necesita estar logueado"],401);
 })->name('login');
 
-Route::get('/secciones','App\Http\Controllers\DepartamentoController@all');
+Route::get('/secciones','App\Http\Controllers\SeccionController@all');
 Route::get('/departamentos','App\Http\Controllers\DepartamentoController@all');
 Route::get('/comunas','App\Http\Controllers\ComunaController@all');
 Route::get('/escuelas','App\Http\Controllers\EscuelaController@all');
