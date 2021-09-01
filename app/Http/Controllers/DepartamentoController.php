@@ -9,6 +9,6 @@ class DepartamentoController extends Controller
 {
     public function all(){
         // return response()->json(['Msg' => Departamento::with('seccion','comunas.escuelas')->get()],200);
-        return response()->json(['departamentos' => Departamento::all()],200);
+        return response()->json(['localidades' => Departamento::all()],200);
     }
 }

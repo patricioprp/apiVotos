@@ -18,6 +18,9 @@ class EscuelaSeeder extends Seeder
         DB::table('escuelas')->insert([
             'nombre' => 'ESC LICEO VOCACIONAL SARMIENTO',
             'domicilio' => 'VIRGEN DE LA MERCED 29',
+            'mesa_cantidad'=>10,
+            'desde'=>1,
+            'hasta'=>10,
             'comuna_id' => 1,
         ]);
     }

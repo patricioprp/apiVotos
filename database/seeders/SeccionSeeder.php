@@ -15,8 +15,12 @@ class SeccionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('seccions')->insert([
-            'nombre' => 'Seccion 1',
-        ]);
+        for($i=1; $i < 18; $i++){
+            DB::table('seccions')->insert([
+                'nombre' => 'Seccion '.$i,
+                'created_at'=>'2021-08-29 00:42:08',
+                'updated_at'=> '2021-08-29 00:42:08',
+            ]);
+        }
     }
 }

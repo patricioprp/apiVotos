@@ -16,8 +16,6 @@ class MesaSeeder extends Seeder
     {
         DB::table('mesas')->insert([
             'nro_mesa'=>1,
-            'desde' => 1,
-            'hasta' => 9,
             'escuela_id' => 1,
         ]);
     }

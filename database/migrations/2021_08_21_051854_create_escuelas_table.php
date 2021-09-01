@@ -17,6 +17,9 @@ class CreateEscuelasTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('domicilio');
+            $table->integer('mesa_cantidad');
+            $table->integer('desde');
+            $table->integer('hasta');
             $table->timestamps();
 
             $table->unsignedBigInteger('comuna_id');

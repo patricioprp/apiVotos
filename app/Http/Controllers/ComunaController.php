@@ -11,22 +11,11 @@ use Illuminate\Http\Request;
 class ComunaController extends Controller
 {
     public function all(){
-        return response()->json(['comunas'=>Comuna::all()],200);
+        return response()->json(['circuitos'=>Comuna::all()],200);
     }
 
     public function findById($id_departamento){
-        // $rules = [
-        //     'id_departamento'       => 'required|Integer'
-        //     ];
-        // $validator = \Validator::make($id_departamento, $rules);
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'created' => false,
-        //         'errors'  => $validator->errors()->all()
-        //     ],500);
-        // }
-
         $comunas = Comuna::where('departamento_id',$id_departamento)->get();
-        return response()->json(['comunasByDepartamento'=>$comunas],200);
+        return response()->json(['circuitosByLocalidad'=>$comunas],200);
     }
 }

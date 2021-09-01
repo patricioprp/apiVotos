@@ -23,18 +23,24 @@ Route::get('/',function(){
     return response()->json(["msg"=>"Necesita estar logueado"],401);
 })->name('login');
 
+
+
+//Ruta localidad = tabla departamento
+//Ruta circuito = tabla comuna
 Route::get('/secciones','App\Http\Controllers\SeccionController@all');
-Route::get('/departamentos','App\Http\Controllers\DepartamentoController@all');
-Route::get('/comunas','App\Http\Controllers\ComunaController@all');
+Route::get('/localidades','App\Http\Controllers\DepartamentoController@all');
+Route::get('/circuitos','App\Http\Controllers\ComunaController@all');
 Route::get('/escuelas','App\Http\Controllers\EscuelaController@all');
 Route::get('/mesas','App\Http\Controllers\MesaController@all');
 Route::get('/partidos','App\Http\Controllers\PartidoController@all');
 Route::get('/subpartidos','App\Http\Controllers\SubpartidoController@all');
 
 
-Route::get('/departamento-comunas/{id}','App\Http\Controllers\ComunaController@findById');
-Route::get('/comuna-escuelas/{id_comuna}','App\Http\Controllers\EscuelaController@findById');
+Route::get('/localidad-comunas/{id}','App\Http\Controllers\ComunaController@findById');
+Route::get('/circuito-escuelas/{id_circuito}','App\Http\Controllers\EscuelaController@findById');
 Route::get('/escuela-mesas/{id_escuela}','App\Http\Controllers\MesaController@findById');
+
+Route::get('/escuelasByLocalidad/{id_localidad}','App\Http\Controllers\EscuelaController@getEscuelas');
 
 
 
