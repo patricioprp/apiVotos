@@ -18,7 +18,7 @@ class EscuelaController extends Controller
     }
 
     public function getEscuelas($id_localidad){
-        //hacer un join
+        //validar el find or fail del id_localidad
         $escuelas = Departamento::join('comunas','departamentos.id','=','comunas.departamento_id')
         ->where('comunas.departamento_id','=',$id_localidad)
         ->join('escuelas',function($j){

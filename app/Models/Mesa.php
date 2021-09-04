@@ -9,6 +9,11 @@ class Mesa extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'escuela_id',
+        'nro_mesa',
+    ];
+
     public function escuela()
     {
         return $this->belongsTo(Escuela::class);

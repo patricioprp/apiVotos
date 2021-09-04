@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Mesa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,8 @@ class AuthController extends Controller
             'name'      => 'required|string',
             'email'     => 'required|string|email|unique:users',
             'dni'       => 'required|Integer|unique:users',
-            'mesa_id'   => 'required|Integer|Min:1|Max:4|unique:users',
+            'nro_mesa'   => 'required|Integer|Min:1|Max:50000|unique:mesas',
+            'escuela_id' => 'required|Integer',
             'password'  => 'required|string'
             ];
         // Ejecutamos el validador, en caso de que falle devolvemos la respuesta
@@ -36,13 +38,30 @@ class AuthController extends Controller
             ],500);
         }
 
+
+        try {
+        DB::beginTransaction();
+       $mesa = Mesa::create([
+            'nro_mesa' => $request->nro_mesa,
+            'escuela_id' => $request->escuela_id
+        ]);
+        DB::commit();
+        Log::info('Se guardo la mesa N°' . $request->nro_mesa);
+    } catch (\PDOException $e) {
+        DB::rollBack();
+        Log::error('Error al almacenar la mesa N°' . $request->nro_mesa . $e->getMessage());
+        return response()->json([
+            'message' => $e->getMessage()
+        ], 500);
+     }
+
         try {
             DB::beginTransaction();
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'dni' => $request->dni,
-            'mesa_id' => $request->mesa_id,
+            'mesa_id' => $mesa->id,
             'password' => bcrypt($request->password)
         ]);
         DB::commit();
