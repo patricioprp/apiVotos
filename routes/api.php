@@ -34,6 +34,7 @@ Route::get('/escuelas','App\Http\Controllers\EscuelaController@all');
 Route::get('/mesas','App\Http\Controllers\MesaController@all');
 Route::get('/partidos','App\Http\Controllers\PartidoController@all');
 Route::get('/subpartidos','App\Http\Controllers\SubpartidoController@all');
+Route::get('/partidos-full','App\Http\Controllers\PartidoController@full');
 
 
 Route::get('/localidad-comunas/{id}','App\Http\Controllers\ComunaController@findById');
