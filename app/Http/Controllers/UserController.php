@@ -9,7 +9,11 @@ class UserController extends Controller
 {
     public function all(){
 
-     return response()->json(['usuarios'=>User::all()],200);
+     return response()->json([
+        'success' => true,
+        'message' => 'usuarios obtenidos correctamente',
+         'data'=>User::orderBy('nombre','asc')->get()
+        ],200);
         
     }
 }

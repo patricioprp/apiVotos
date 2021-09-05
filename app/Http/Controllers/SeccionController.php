@@ -8,6 +8,10 @@ use App\Models\Seccion;
 class SeccionController extends Controller
 {
     public function all(){
-        return response()->json(['secciones'=>Seccion::all()],200);
+        return response()->json([
+            'success' => true,
+            'message' => 'secciones obtenidas correctamente',
+            'data'=>Seccion::orderBy('nombre','asc')->get()
+        ],200);
     }
 }

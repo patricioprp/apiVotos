@@ -33,6 +33,7 @@ class AuthController extends Controller
         $validator = \Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return response()->json([
+                'success' => false,
                 'created' => false,
                 'errors'  => $validator->errors()->all()
             ],500);
@@ -51,6 +52,7 @@ class AuthController extends Controller
         DB::rollBack();
         Log::error('Error al almacenar la mesa N°' . $request->nro_mesa . $e->getMessage());
         return response()->json([
+            'success' => false,
             'message' => $e->getMessage()
         ], 500);
      }
@@ -75,6 +77,7 @@ class AuthController extends Controller
         DB::rollBack();
         Log::error('Error al almacenar el usuario:' . $request->apellido . $e->getMessage());
         return response()->json([
+            'success' => false,
             'message' => $e->getMessage()
         ], 500);
      }
@@ -95,6 +98,7 @@ class AuthController extends Controller
         $validator = \Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return response()->json([
+                'success' => false,
                 'created' => false,
                 'errors'  => $validator->errors()->all()
             ],500);
@@ -104,6 +108,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials))
             return response()->json([
+                'success' => false,
                 'message' => 'Unauthorized'
             ], 401);
 
@@ -126,6 +131,7 @@ class AuthController extends Controller
         $request->user()->token()->revoke();
 
         return response()->json([
+            "success" => true,
             'message' => 'Successfully logged out'
         ]);
     }

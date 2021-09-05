@@ -22,7 +22,7 @@ Route::get('/',function(){
     //cuando Passport no reconoce el token redirecciona a una ruta de nombre "login"
     return response()->json([
         "success" => false,
-        "messagge"=>"Necesita estar logueado"
+        "message"=>"Necesita estar logueado"
     ],401);
 })->name('login');
 

@@ -11,11 +11,19 @@ use Illuminate\Support\Facades\Log;
 class MesaController extends Controller
 {
     public function all(){
-        return response()->json(['mesas'=>Mesa::all()],200);
+        return response()->json([
+            'success' => true,
+            'message' => 'escuelas obtenidas correctamente',
+            'data' => Mesa::orderBy('nombre','asc')->get()
+        ],200);
     }
 
     public function findById($id_escuela){
         $mesas = Mesa::where('escuela_id',$id_escuela)->get();
-        return response()->json(['mesasByEscuela'=>$mesas],200);
+        return response()->json([
+            'success' => true,
+            'message' => 'escuela obtenida correctamente',
+            'data'=>$mesas
+        ],200);
     }
 }

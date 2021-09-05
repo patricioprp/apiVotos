@@ -9,12 +9,20 @@ use App\Models\Departamento;
 class EscuelaController extends Controller
 {
     public function all(){
-        return response()->json(['escuelas'=>Escuela::all()],200);       
+        return response()->json([
+            'success' => true,
+            'message' => 'escuelas obtenidas correctamente',
+            'data'=>Escuela::orderBy('nombre','asc')->get()
+        ],200);       
        }
 
     public function findById($id_comuna){
-        $escuelas = Escuela::where('comuna_id',$id_comuna)->get();
-        return response()->json(['escuelasByComuna'=>$escuelas],200);
+        $escuelas = Escuela::where('comuna_id',$id_comuna)->orderBy('nombre','asc')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'escuelas obtenidas por circuito',
+            'data'=>$escuelas
+        ],200);
     }
 
     public function getEscuelas($id_localidad){
@@ -24,7 +32,11 @@ class EscuelaController extends Controller
         ->join('escuelas',function($j){
             $j->on('escuelas.comuna_id','=','comunas.id');
         })
-        ->get();
-        return response()->json(['EscuelasByLocalidad'=>$escuelas],200);
+        ->orderBy('escuelas.nombre','asc')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'escuelas obtenidas por departamento correctamente',
+            'data'=>$escuelas
+        ],200);
     }
 }

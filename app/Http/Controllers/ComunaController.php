@@ -11,11 +11,20 @@ use Illuminate\Http\Request;
 class ComunaController extends Controller
 {
     public function all(){
-        return response()->json(['circuitos'=>Comuna::all()],200);
+        return response()->json([
+            'success' => true,
+            'message' => 'circuitos obtenidos correctamente',
+            'data'=> Comuna::orderBy('nombre','asc')->get()
+        ],200);
     }
 
     public function findById($id_departamento){
-        $comunas = Comuna::where('departamento_id',$id_departamento)->get();
-        return response()->json(['circuitosByLocalidad'=>$comunas],200);
+        $comunas = Comuna::where('departamento_id',$id_departamento)
+                   ->orderBy('nombre','asc')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'circuitos por localidad obtenidos correctamente',
+            'data'=>$comunas
+        ],200);
     }
 }
