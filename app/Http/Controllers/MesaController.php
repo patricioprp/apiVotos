@@ -14,7 +14,7 @@ class MesaController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'escuelas obtenidas correctamente',
-            'data' => Mesa::orderBy('nombre','asc')->get()
+            'data' => Mesa::orderBy('nro_mesa','asc')->get()
         ],200);
     }
 
