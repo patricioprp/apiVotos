@@ -15,7 +15,8 @@ class CreateMesaSubPartido extends Migration
     {
         Schema::create('mesa_sub_partido', function (Blueprint $table) {
             $table->id();
-            $table->integer('voto_partido');
+            $table->integer('voto_senador');
+            $table->integer('voto_diputado');
             $table->timestamps();
 
             $table->unsignedBigInteger('mesa_id');

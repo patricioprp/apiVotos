@@ -20,7 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',function(){
     //cuando Passport no reconoce el token redirecciona a una ruta de nombre "login"
-    return response()->json(["msg"=>"Necesita estar logueado"],401);
+    return response()->json([
+        "success" => false,
+        "messagge"=>"Necesita estar logueado"
+    ],401);
 })->name('login');
 
 

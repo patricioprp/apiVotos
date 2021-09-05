@@ -135,10 +135,11 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
+        $mesa = Mesa::find($request->user()->mesa_id);
         return response()->json([
             'success' => true,
             'message' => "usuario obtenido correctamente",
-            'data' => $request->user(),
+            'data' => ["user"=>$request->user(),'mesa' => $mesa],
         ]);
     }
 }
