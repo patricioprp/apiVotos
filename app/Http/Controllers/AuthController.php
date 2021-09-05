@@ -67,7 +67,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
         DB::commit();
-        Log::info('Se guardo el usuario ' . $request->apellido);
+        Log::info('Se guardo el usuario ' . $request->name);
         return response()->json([
             'message' => 'Successfully created user!',
             'success' => true,

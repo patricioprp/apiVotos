@@ -43,9 +43,8 @@ Route::get('/partidos-full','App\Http\Controllers\PartidoController@full');
 Route::get('/localidad-comunas/{id}','App\Http\Controllers\ComunaController@findById');
 Route::get('/circuito-escuelas/{id_circuito}','App\Http\Controllers\EscuelaController@findById');
 Route::get('/escuela-mesas/{id_escuela}','App\Http\Controllers\MesaController@findById');
-
 Route::get('/escuelas-localidad/{id_localidad}','App\Http\Controllers\EscuelaController@getEscuelas');
-
+Route::get('/mesas/subpartidos','App\Http\Controllers\MesaController@getSubpartidos');
 
 
 
@@ -61,5 +60,6 @@ Route::group([
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
         Route::get('user', 'App\Http\Controllers\AuthController@user');
         Route::get('users','App\Http\Controllers\UserController@all');
+        Route::post('votos','App\Http\Controllers\MesaController@voto');
     });
 });

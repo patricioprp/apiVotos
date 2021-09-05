@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mesa;
+use App\Models\SubPartido;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -22,8 +23,21 @@ class MesaController extends Controller
         $mesas = Mesa::where('escuela_id',$id_escuela)->get();
         return response()->json([
             'success' => true,
-            'message' => 'escuela obtenida correctamente',
-            'data'=>$mesas
+            'message' => 'Mesas de escuela obtenida correctamente',
+            'data' => $mesas
         ],200);
+    }
+
+    public function getSubpartidos(){
+        $mesas = Mesa::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'Mesa obtenida correctamente',
+            'data' => $mesas
+        ],200);
+    }
+
+    public function voto(Request $request){
+        return response()->json(['data' => $request->all()],200);
     }
 }
