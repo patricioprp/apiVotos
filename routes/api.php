@@ -44,7 +44,7 @@ Route::get('/localidad-comunas/{id}','App\Http\Controllers\ComunaController@find
 Route::get('/circuito-escuelas/{id_circuito}','App\Http\Controllers\EscuelaController@findById');
 Route::get('/escuela-mesas/{id_escuela}','App\Http\Controllers\MesaController@findById');
 
-Route::get('/escuelasByLocalidad/{id_localidad}','App\Http\Controllers\EscuelaController@getEscuelas');
+Route::get('/escuelas-localidad/{id_localidad}','App\Http\Controllers\EscuelaController@getEscuelas');
 
 
 
