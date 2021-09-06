@@ -38,6 +38,59 @@ class MesaController extends Controller
     }
 
     public function voto(Request $request){
-        return response()->json(['data' => $request->all()],200);
+
+        $rules = [
+            'total_mesa'     => 'required|integer',
+            ];
+        $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'created' => false,
+                'errors'  => $validator->errors()->all()
+            ],500);
+        }
+
+        try{
+            $mesa = Mesa::findOrFail($request->id_mesa);
+            $mesa->votos_totales = $request->total_mesa;
+            $mesa->cierre_votacion = now()->format('Y-m-d');
+            $mesa->save();
+
+            try {
+                DB::beginTransaction();
+                foreach($request->votos_subpartidos as $votos){
+                    $mesa->subPartidos()->attach($votos['id'],array(
+                        'voto_diputado'=>$votos['cantidades']['diputados'],
+                        'voto_senador'=>$votos['cantidades']['senadores']
+                    ));
+                }
+                DB::commit();
+                Log::info('Se guardo el voto ');
+                return response()->json([
+                    'success' => true,
+                    'message' => "Se registro el voto correctamente",
+                ], 201);
+            } catch (\PDOException $e) {
+                DB::rollBack();
+                Log::error('Error al almacenar el voto' . $e->getMessage());
+            }
+
+        }catch(ModelNotFoundException $exception){
+            Log::error('No se encontro la mesa ' . $exception->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ],500);
+        }
+
+    }
+
+    public function getMesaVotos(Request $request){
+            return response()->json([
+                'success' => true,
+                'message' => "votos obtenidos correctamente",
+                'data' => ["user" => $request->user(),'votos' => $request->user()->mesa->subPartidos],
+            ]);
     }
 }

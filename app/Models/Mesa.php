@@ -11,6 +11,9 @@ class Mesa extends Model
 
     protected $fillable = [
         'escuela_id',
+        'estoy_en_mesa',
+        'cierre_votacion',
+        'votos_totales',
         'nro_mesa',
     ];
 
@@ -26,6 +29,7 @@ class Mesa extends Model
 
     public function subPartidos()
     {
-       return $this->belongsToMany(SubPartido::class);
+       return $this->belongsToMany(SubPartido::class)
+       ->withPivot('voto_diputado','voto_senador');
     }
 }

@@ -61,5 +61,6 @@ Route::group([
         Route::get('user', 'App\Http\Controllers\AuthController@user');
         Route::get('users','App\Http\Controllers\UserController@all');
         Route::post('votos','App\Http\Controllers\MesaController@voto');
+        Route::get('mesa-votos','App\Http\Controllers\MesaController@getMesaVotos');
     });
 });
