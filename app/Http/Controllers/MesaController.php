@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mesa;
+use App\Models\User;
 use App\Models\SubPartido;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
@@ -90,7 +91,7 @@ class MesaController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => "votos obtenidos correctamente",
-                'data' => ["user" => $request->user(),'votos' => $request->user()->mesa->subPartidos],
+                'data' =>  User::with('mesa','mesa.subPartidos')->get()
             ]);
     }
 }
