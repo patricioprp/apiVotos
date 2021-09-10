@@ -54,27 +54,34 @@ class MesaController extends Controller
 
         try{
             $mesa = Mesa::findOrFail($request->id_mesa);
-            $mesa->votos_totales = $request->total_mesa;
-            $mesa->cierre_votacion = now()->format('Y-m-d');
-            $mesa->save();
-
-            try {
-                DB::beginTransaction();
-                foreach($request->votos_subpartidos as $votos){
-                    $mesa->subPartidos()->attach($votos['id'],array(
-                        'voto_diputado'=>$votos['cantidades']['diputados'],
-                        'voto_senador'=>$votos['cantidades']['senadores']
-                    ));
-                }
-                DB::commit();
-                Log::info('Se guardo el voto ');
+            if($mesa->votos_totales != 0){
                 return response()->json([
-                    'success' => true,
-                    'message' => "Se registro el voto correctamente",
-                ], 201);
-            } catch (\PDOException $e) {
-                DB::rollBack();
-                Log::error('Error al almacenar el voto' . $e->getMessage());
+                    'success' => false,
+                    'message' => "Esta mesa ya registra votos",
+                ], 500);
+            }else{
+                $mesa->votos_totales = $request->total_mesa;
+                $mesa->cierre_votacion = now()->format('Y-m-d');
+                $mesa->save();
+    
+                try {
+                    DB::beginTransaction();
+                    foreach($request->votos_subpartidos as $votos){
+                        $mesa->subPartidos()->attach($votos['id'],array(
+                            'voto_diputado'=>$votos['cantidades']['diputados'],
+                            'voto_senador'=>$votos['cantidades']['senadores']
+                        ));
+                    }
+                    DB::commit();
+                    Log::info('Se guardo el voto ');
+                    return response()->json([
+                        'success' => true,
+                        'message' => "Se registro el voto correctamente",
+                    ], 201);
+                } catch (\PDOException $e) {
+                    DB::rollBack();
+                    Log::error('Error al almacenar el voto' . $e->getMessage());
+                }
             }
 
         }catch(ModelNotFoundException $exception){
