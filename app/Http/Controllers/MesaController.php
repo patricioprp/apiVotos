@@ -77,7 +77,7 @@ class MesaController extends Controller
                     Log::info('Se guardo el voto ');
                     return response()->json([
                         'success' => true,
-                        'message' => "Se registro el voto correctamente",
+                        'message' => "Se registron los votos correctamente",
                     ], 201);
                 } catch (\PDOException $e) {
                     DB::rollBack();
