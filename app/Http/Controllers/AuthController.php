@@ -44,8 +44,8 @@ class AuthController extends Controller
         DB::beginTransaction();
        $mesa = Mesa::create([
             'nro_mesa' => $request->nro_mesa,
-            'estoy_en_mesa' => '2021-01-01',
-            'cierre_votacion' => '2021-01-01',
+            'estoy_en_mesa' => '00:00',
+            'cierre_votacion' => '00:00',
             'votos_totales' => 0,
             'escuela_id' => $request->escuela_id
         ]);

@@ -61,7 +61,8 @@ class MesaController extends Controller
                 ], 500);
             }else{
                 $mesa->votos_totales = $request->total_mesa;
-                $mesa->cierre_votacion = now()->format('Y-m-d');
+                // $mesa->cierre_votacion = now()->format('Y-m-d');
+                $mesa->cierre_votacion = now()->format('h:i:s');
                 $mesa->save();
     
                 try {
@@ -100,5 +101,16 @@ class MesaController extends Controller
                 'message' => "votos obtenidos correctamente",
                 'data' =>  User::with('mesa','mesa.subPartidos')->get()
             ]);
+    }
+
+    public function estoy(Request $request){
+        $mesa = Mesa::find($request->mesa_id);
+        $mesa->estoy_en_mesa = now()->format('h:i:s');
+        $mesa->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => "Se registro su presencia en la mesa N° ".$mesa->nro_mesa,
+        ]);
     }
 }

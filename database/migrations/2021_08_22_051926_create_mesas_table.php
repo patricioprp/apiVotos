@@ -16,8 +16,10 @@ class CreateMesasTable extends Migration
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
             $table->integer('nro_mesa');
-            $table->date('estoy_en_mesa');
-            $table->date('cierre_votacion');
+            // $table->date('estoy_en_mesa');
+            $table->time('estoy_en_mesa');
+            // $table->date('cierre_votacion');
+            $table->time('cierre_votacion');
             $table->integer('votos_totales');
             $table->timestamps();
 
